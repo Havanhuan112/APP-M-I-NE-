@@ -4,73 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="msapplication-TileColor" content="#000">
+<meta name="theme-color" content="#000">
     <style>
         :root {
-            --primary: #7c4dff;
-            --primary-light: #a07cff;
-            --primary-dark: #6200ea;
+            --primary: #8a2be2;           /* Purple */
+            --primary-light: #9d4eed;
+            --primary-dark: #6a1cb2;
+            --primary-transparent: rgba(138, 43, 226, 0.2);
+            --primary-glow: rgba(138, 43, 226, 0.5);
             
-            --secondary: #ff4081;
-            --secondary-light: #ff80ab;
-            --secondary-dark: #c51162;
+            --accent: #ff3a5e;            /* Red-Pink */
+            --accent-light: #ff5c79;
+            --accent-dark: #e01e41;
             
-            --accent-1: #00e5ff;
-            --accent-2: #76ff03;
-            --accent-3: #ff9100;
-            --accent-4: #ff3d00;
-            --accent-5: #651fff;
+            --success: #00c853;           /* Green */
+            --warning: #ffab00;           /* Amber */
+            --error: #f44336;             /* Red */
+            --info: #2196f3;              /* Blue */
             
-            --dark-bg: rgba(18, 18, 24, 0.7);
-            --menu-bg: rgba(25, 25, 35, 0.6);
-            --card-bg: rgba(35, 35, 45, 0.4);
-            
-            --border: rgba(255, 255, 255, 0.15);
-            --border-hover: rgba(255, 255, 255, 0.25);
-            --border-active: rgba(255, 255, 255, 0.4);
-            --border-glow: 0 0 10px rgba(255, 255, 255, 0.15);
+            --background: #121212;
+            --card: rgba(30, 30, 35, 0.8);
+            --card-dark: rgba(25, 25, 30, 0.9);
+            --card-light: rgba(35, 35, 40, 0.7);
             
             --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.85);
-            --text-tertiary: rgba(255, 255, 255, 0.65);
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-tertiary: rgba(255, 255, 255, 0.6);
+            --text-disabled: rgba(255, 255, 255, 0.4);
             
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.15);
-            --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.25);
+            --border: rgba(255, 255, 255, 0.1);
+            --border-active: rgba(255, 255, 255, 0.2);
             
-            --font-main: 'Poppins', sans-serif;
-            --font-display: 'Rajdhani', sans-serif;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
             
-            --radius-sm: 6px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
+            --blur: 15px;
             
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
+            --font-main: 'Rajdhani', sans-serif;
+            --font-display: 'Oxanium', cursive;
             
-            --backdrop-blur: 15px;
-            --border-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            --anim-fast: 0.2s;
+            --anim-normal: 0.3s;
+            --anim-slow: 0.5s;
         }
 
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            background: url('https://media0.giphy.com/media/oFYKw5OTZBZzVONpUh/200w.gif?cid=6c09b952x3jjmwfq36mchoitm7i1t3g605ylua58iy3bzguv&ep=v1_gifs_search&rid=200w.gif&ct=g') no-repeat center center fixed;
-            background-size: cover;
             font-family: var(--font-main);
-            color: var(--text-primary);
+            background: #000;
+            background-size: cover;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            color: var(--text-primary);
             padding: 20px;
+            position: relative;
         }
 
         body::before {
@@ -80,99 +79,40 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
             z-index: -1;
         }
 
-        /* Container & Orientation Controls */
-        .menu-container {
-            max-width: 1000px;
+        .container {
             width: 100%;
+            max-width: 1000px;
             position: relative;
-            overflow: hidden;
-            transition: var(--transition-normal);
         }
 
-        .orientation-toggle {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 10;
-            background: var(--dark-bg);
-            border-radius: var(--radius-lg);
-            padding: 5px;
+        /* Mod Menu Main Container */
+        .mod-menu {
+            width: 100%;
+            background: var(--card);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            border-radius: 12px;
+            overflow: hidden;
             display: flex;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            backdrop-filter: blur(var(--backdrop-blur));
-            -webkit-backdrop-filter: blur(var(--backdrop-blur));
-        }
-
-        .orientation-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-tertiary);
-            padding: 8px 12px;
-            cursor: pointer;
-            border-radius: var(--radius-md);
-            transition: var(--transition-fast);
-        }
-
-        .orientation-btn.active {
-            background: var(--primary);
-            color: var(--text-primary);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .orientation-btn:not(.active):hover {
-            color: var(--text-secondary);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .orientation-btn i {
-            font-size: 18px;
-        }
-
-        /* Main Menu Card */
-        .menu-card {
-            background: var(--menu-bg);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            backdrop-filter: blur(var(--backdrop-blur));
-            -webkit-backdrop-filter: blur(var(--backdrop-blur));
-            border: 1px solid var(--border);
-            margin-top: 10px;
+            flex-direction: column;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px var(--primary-glow), inset 0 0 20px var(--primary-transparent);
             position: relative;
-            transition: var(--transition-normal);
-            max-width: 100%;
         }
 
-        .menu-header {
-            background: linear-gradient(to right, var(--primary-dark), var(--primary));
-            padding: 15px 20px;
+        /* Title Bar */
+        .title-bar {
+            background: var(--card-dark);
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            overflow: hidden;
             border-bottom: 1px solid var(--border);
-        }
-
-        .menu-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: linear-gradient(
-                rgba(255, 255, 255, 0.1),
-                transparent,
-                rgba(255, 255, 255, 0.05)
-            );
-            transform: rotate(30deg);
-            pointer-events: none;
+            position: relative;
         }
 
         .menu-title {
@@ -180,184 +120,535 @@
             font-weight: 700;
             font-size: 24px;
             letter-spacing: 1px;
-            margin: 0;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            text-shadow: 0 0 10px var(--primary-glow);
             display: flex;
             align-items: center;
             gap: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        .menu-title-icon {
+        .title-icon {
+            background: var(--primary);
             width: 32px;
             height: 32px;
-            background: linear-gradient(to bottom right, var(--accent-1), var(--accent-5));
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .version-badge {
+            background: var(--card-light);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--border);
+        }
+
+        /* Content Area */
+        .content-area {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Left Panel */
+        .panel {
+            background: var(--card-light);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all var(--anim-normal) ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .panel:hover {
+            border-color: var(--border-active);
             box-shadow: var(--shadow-sm);
+        }
+
+        .left-panel {
+            width: 350px;
+            flex-shrink: 0;
+        }
+
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 15px;
+            font-weight: 600;
+            font-size: 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-content {
+            padding: 20px;
+        }
+
+        /* Login Form */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary);
+            border-bottom-color: var(--primary);
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+            filter: drop-shadow(0 0 5px var(--primary-glow));
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 16px;
+        }
+
+        .input-field {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            padding: 12px 15px 12px 40px;
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            transition: all var(--anim-fast) ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-transparent);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-disabled);
+        }
+
+        .login-btn {
+            background: var(--primary);
+            color: var(--text-primary);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all var(--anim-fast) ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0)
+            );
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        }
+
+        .login-btn:hover::after {
+            opacity: 1;
+            left: 100%;
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
+        }
+
+        /* User Info */
+        .user-info {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .user-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-dark);
+            overflow: hidden;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 2px;
+            color: var(--text-primary);
+        }
+
+        .user-role {
+            font-size: 14px;
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary-light);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .login-time {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        /* Admin Info */
+        .admin-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .server-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .status-value {
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-online {
+            background: var(--success);
+            box-shadow: 0 0 5px var(--success);
+        }
+
+        .status-warning {
+            background: var(--warning);
+            box-shadow: 0 0 5px var(--warning);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        /* Feature Switches */
+        .features {
+            display: none;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all var(--anim-fast) ease;
             position: relative;
             overflow: hidden;
         }
 
-        .menu-title-icon::after {
+        .feature-item::before {
             content: '';
             position: absolute;
-            width: 150%;
-            height: 150%;
-            top: -25%;
-            left: -25%;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle at center,
+                rgba(138, 43, 226, 0.2),
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity var(--anim-normal) ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .feature-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Fire effect for active features */
+        .feature-item.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(255, 58, 94, 0.5);
+        }
+
+        .feature-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
             background: linear-gradient(
+                to top,
+                rgba(255, 58, 94, 0.8),
+                rgba(255, 165, 0, 0.6),
+                rgba(255, 214, 0, 0.3)
+            );
+            filter: blur(4px);
+            opacity: 0.7;
+            animation: flicker 2s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.7; height: 8px; }
+            25% { opacity: 0.8; height: 10px; }
+            50% { opacity: 0.6; height: 7px; }
+            75% { opacity: 0.9; height: 9px; }
+        }
+
+        .feature-name {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon {
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, rgba(138, 43, 226, 0.7), rgba(106, 28, 178, 0.7));
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--text-primary);
+            box-shadow: 0 0 8px rgba(138, 43, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
                 transparent,
-                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.3),
                 transparent
             );
             transform: rotate(45deg);
             animation: shimmer 3s infinite;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
+        .feature-item.active .feature-icon {
+            background: linear-gradient(145deg, rgba(255, 58, 94, 0.8), rgba(224, 30, 65, 0.8));
+            box-shadow: 0 0 10px rgba(255, 58, 94, 0.5);
+            animation: pulse 2s infinite alternate;
         }
 
-        .menu-subtitle {
-            font-size: 13px;
-            opacity: 0.9;
-            font-weight: 300;
-            margin-left: 42px;
-            margin-top: -2px;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .menu-version {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 4px 8px;
-            border-radius: var(--radius-sm);
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        /* Menu Content & Grid */
-        .menu-content {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-            transition: var(--transition-normal);
-        }
-
-        /* Orientation: Vertical */
-        .menu-container.vertical .menu-card {
-            width: 320px;
-            margin: 0 auto;
-        }
-
-        .menu-container.vertical .menu-content {
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        /* Feature Item Styling */
-        .feature-item {
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border);
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(var(--backdrop-blur));
-            -webkit-backdrop-filter: blur(var(--backdrop-blur));
-            box-shadow: var(--border-glow);
-        }
-
-        .feature-item::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--border-gradient);
-            z-index: -1;
-            opacity: 0.3;
-            border-radius: inherit;
-            pointer-events: none;
-        }
-
-        .feature-item:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(124, 77, 255, 0.15);
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent-1);
-            opacity: 0;
-            transition: var(--transition-fast);
-        }
-
-        .feature-item:nth-child(3n+1)::before { background: var(--accent-1); }
-        .feature-item:nth-child(3n+2)::before { background: var(--accent-2); }
-        .feature-item:nth-child(3n+3)::before { background: var(--accent-3); }
-        .feature-item:nth-child(3n+4)::before { background: var(--accent-4); }
-        .feature-item:nth-child(3n+5)::before { background: var(--accent-5); }
-
-        .feature-item:hover::before {
-            opacity: 1;
-        }
-
-        .feature-item.active::before {
-            opacity: 1;
-        }
-
-        .feature-info {
-            display: flex;
-            flex-direction: column;
-            color: var(--text-secondary);
-        }
-
-        .feature-name {
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 2px;
-            transition: var(--transition-fast);
-        }
-
-        .feature-description {
-            font-size: 11px;
-            opacity: 0.7;
-            max-width: 110px;
-            line-height: 1.3;
-            transition: var(--transition-fast);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .feature-item:hover .feature-name,
-        .feature-item.active .feature-name {
-            color: var(--text-primary);
-        }
-
-        .feature-item:hover .feature-description,
-        .feature-item.active .feature-description {
-            opacity: 0.9;
-        }
-
-        /* Switch Toggle */
+        /* Switch Styling */
         .switch {
             position: relative;
             display: inline-block;
-            width: 38px;
+            width: 40px;
             height: 20px;
+            z-index: 1;
         }
 
         .switch input {
@@ -366,492 +657,445 @@
             height: 0;
         }
 
-        .slider {
+        .switch-slider {
             position: absolute;
             cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(255, 255, 255, 0.1);
-            transition: var(--transition-fast);
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: .3s;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--border);
             overflow: hidden;
-        }
-        
-        .slider::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent);
-            opacity: 0;
-            transition: var(--transition-fast);
-            pointer-events: none;
-            z-index: 1;
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
         }
 
-        .slider:before {
+        .switch-slider:before {
             position: absolute;
             content: "";
             height: 14px;
             width: 14px;
-            left: 2px;
+            left: 3px;
             bottom: 2px;
-            background-color: white;
-            transition: var(--transition-fast);
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            transition: .3s;
             border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             z-index: 2;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
         }
 
-        input:checked + .slider {
-            background-color: var(--primary);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 8px rgba(124, 77, 255, 0.5);
-        }
-        
-        input:checked + .slider::after {
-            opacity: 1;
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 5px var(--primary);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(18px);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-        }
-
-        .feature-item:nth-child(3n+1) input:checked + .slider { background-color: var(--accent-1); }
-        .feature-item:nth-child(3n+2) input:checked + .slider { background-color: var(--accent-2); }
-        .feature-item:nth-child(3n+3) input:checked + .slider { background-color: var(--accent-3); }
-        .feature-item:nth-child(3n+4) input:checked + .slider { background-color: var(--accent-4); }
-        .feature-item:nth-child(3n+5) input:checked + .slider { background-color: var(--accent-5); }
-
-        /* Menu Footer */
-        .menu-footer {
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: var(--text-tertiary);
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 1px solid var(--border);
-        }
-
-        .menu-footer a {
-            color: var(--primary-light);
-            text-decoration: none;
-            position: relative;
-            transition: var(--transition-fast);
-        }
-
-        .menu-footer a:hover {
-            color: var(--text-primary);
-        }
-
-        .menu-footer a::after {
+        .switch-slider::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            top: 0;
             left: 0;
-            width: 0;
-            height: 1px;
-            background: currentColor;
-            transition: var(--transition-fast);
-        }
-
-        .menu-footer a:hover::after {
             width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
+            z-index: 1;
+            opacity: 0.5;
         }
 
-        /* Notifications */
+        .feature-item:hover .switch-slider {
+            border-color: var(--primary);
+        }
+
+        input:checked + .switch-slider {
+            background: linear-gradient(to right, var(--accent-dark), var(--accent));
+            box-shadow: 0 0 8px var(--accent);
+            border-color: var(--accent);
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(20px);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Fire effect in the switch */
+        input:checked + .switch-slider::after {
+            background: linear-gradient(
+                to right,
+                rgba(255, 58, 94, 0.5),
+                rgba(255, 165, 0, 0.3),
+                transparent
+            );
+            animation: flamePulse 2s infinite alternate;
+        }
+        
+        @keyframes flamePulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Notification */
         .notification {
             position: fixed;
             top: 20px;
             right: -300px;
-            background: var(--dark-bg);
-            padding: 12px 15px;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            gap: 12px;
             width: 280px;
+            background: var(--card-dark);
+            padding: 15px;
+            border-radius: 10px;
             border-left: 4px solid var(--primary);
             box-shadow: var(--shadow-md);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 100;
-            backdrop-filter: blur(var(--backdrop-blur));
-            -webkit-backdrop-filter: blur(var(--backdrop-blur));
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
         }
 
         .notification.show {
             right: 20px;
         }
 
-        .notification .icon {
-            font-size: 18px;
+        .notification-icon {
             width: 24px;
             height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: var(--primary);
-            box-shadow: 0 0 10px var(--primary);
+            color: white;
+            box-shadow: 0 0 8px var(--primary-glow);
         }
 
-        .notification .message {
+        .notification-message {
             flex: 1;
-            font-size: 13px;
-            line-height: 1.4;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .menu-container:not(.vertical) .menu-card {
-                max-width: 500px;
-                margin: 0 auto;
+            .content-area {
+                flex-direction: column;
             }
             
-            .menu-container:not(.vertical) .menu-content {
-                grid-template-columns: repeat(2, 1fr);
+            .left-panel {
+                width: 100%;
             }
-        }
-
-        @media (max-width: 500px) {
-            .menu-container:not(.vertical) .menu-content {
+            
+            .features {
                 grid-template-columns: 1fr;
             }
             
-            .menu-container:not(.vertical) .menu-card {
-                width: 100%;
-            }
-            
-            .menu-title {
+            .panel-header, .menu-title {
                 font-size: 20px;
-            }
-            
-            .menu-content {
-                padding: 15px;
-            }
-            
-            .menu-container.vertical .menu-card {
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="menu-container" id="menu-container">
-        <!-- Orientation Toggle -->
-        <div class="orientation-toggle">
-            <button class="orientation-btn active" id="horizontal-btn" data-orientation="horizontal">
-                <i class="fas fa-th-large"></i>
-            </button>
-            <button class="orientation-btn" id="vertical-btn" data-orientation="vertical">
-                <i class="fas fa-th-list"></i>
-            </button>
-        </div>
-        
-        <!-- Tab Controls -->
-        <div class="tab-controls">
-            <button class="tab-btn active" data-tab="features">
-                <i class="fas fa-gamepad"></i> Tính Năng
-            </button>
-            <button class="tab-btn" data-tab="guide">
-                <i class="fas fa-book"></i> Hướng Dẫn
-            </button>
-        </div>
-        
-        <!-- Menu Card -->
-        <div class="menu-card" id="features-tab">
-            <div class="menu-header">
-                <div>
-                    <h1 class="menu-title">
-                        <div class="menu-title-icon">
-                            <i class="fas fa-gamepad"></i>
+    <div class="container">
+        <div class="mod-menu">
+            <div class="title-bar">
+                <h1 class="menu-title">
+                    <div class="title-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    HUẤN HÀ
+                </h1>
+                <div class="version-badge">v3.2.0</div>
+            </div>
+            
+            <div class="content-area">
+                <!-- Left Panel - Login/User Info -->
+                <div class="panel left-panel">
+                    <div class="panel-header">
+                        <span id="left-panel-title">Đăng Nhập</span>
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="panel-content">
+                        <!-- Login Form -->
+                        <div class="login-form" id="login-form">
+                            <div class="logo-container">
+                                <div class="logo">
+                                    <img src="https://i.imgur.com/5bQftdY.png" alt="Logo">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" class="input-field" id="username" placeholder="Tên tài khoản">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" class="input-field" id="password" placeholder="Mật khẩu">
+                            </div>
+                            <button type="button" class="login-btn" id="login-button">Đăng Nhập</button>
                         </div>
-                        Hà Văn Huấn
-                    </h1>
-                    <div class="menu-subtitle">POCTION YIUSOTER MOD GAME UNTINYVERYS</div>
-                </div>
-                <div class="menu-version">v2.5.0</div>
-            </div>
-            
-            <div class="menu-content">
-                <!-- Feature 1 -->
-                <div class="feature-item" data-feature="speed">
-                    <div class="feature-info">
-                        <div class="feature-name">AIMLOCK</div>
-                        <div class="feature-description">Tăng Khả Năng Bám Đầu</div>
+                        
+                        <!-- User Info (Hidden Initially) -->
+                        <div class="user-info" id="user-info">
+                            <div class="user-header">
+                                <div class="user-avatar">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSI2NCIgeTE9IjE5LjUiIHgyPSI2NCIgeTI9IjEwOC41IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOGEyYmUyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNjEwMGZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjQiIGN5PSI2NCIgcj0iNjQiIGZpbGw9IiMxMDEwMTAiLz48Y2lyY2xlIGN4PSI2NCIgY3k9IjY0IiByPSI0OCIgZmlsbD0idXJsKCNhKSIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iNDYiIHI9IjE2IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTQwLDkzYzAtMTcuNywxMC43LTMyLDI0LTMyUzg4LDc1LjMsODgsOTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iOCIvPjwvc3ZnPg==" alt="User Avatar">
+                                </div>
+                                <div class="user-details">
+                                    <div class="user-name" id="profile-name">Admin VIP</div>
+                                    <div class="user-role" id="profile-role">Premium Member</div>
+                                </div>
+                            </div>
+                            
+                            <div class="user-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value">99</div>
+                                    <div class="stat-label">Level</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">30</div>
+                                    <div class="stat-label">Days</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">VIP</div>
+                                    <div class="stat-label">Status</div>
+                                </div>
+                            </div>
+                            
+                            <div class="login-time" id="login-time">
+                                Đăng nhập: 28/04/2025 - 18:30:45
+                            </div>
+                        </div>
                     </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
                 </div>
                 
-                <!-- Feature 2 -->
-                <div class="feature-item" data-feature="wallhack">
-                    <div class="feature-info">
-                        <div class="feature-name">AIMBOT</div>
-                        <div class="feature-description">Hỗ Trợ Ghim Đầu Khi Kéo</div>
+                <!-- Right Panel - Admin Info/Features -->
+                <div class="panel right-panel">
+                    <div class="panel-header">
+                        <span id="right-panel-title">Thông Tin Hệ Thống</span>
+                        <i class="fas fa-server"></i>
                     </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 3 -->
-                <div class="feature-item" data-feature="aimbot">
-                    <div class="feature-info">
-                        <div class="feature-name">AIMHEAD</div>
-                        <div class="feature-description">Tăng Tỉ Lệ Bám Đầu Cao</div>
+                    <div class="panel-content">
+                        <!-- Admin Info -->
+                        <div class="admin-info" id="admin-info">
+                            <div class="server-status">
+                                <div class="status-item">
+                                    <div class="status-label">Server Status</div>
+                                    <div class="status-value">
+                                        <span class="status-indicator status-online"></span>
+                                        Online
+                                    </div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-label">Server Load</div>
+                                    <div class="status-value">
+                                        <span class="status-indicator status-warning"></span>
+                                        65%
+                                    </div>
+                                </div>
+                                <div class="status-item">
+                                    <div class="status-label">Active Users</div>
+                                    <div class="status-value">254</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <div class="info-label">Version</div>
+                                    <div class="info-value">3.2.0 Beta</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Last Update</div>
+                                    <div class="info-value">28/04/2025</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">API Status</div>
+                                    <div class="info-value">Connected</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-label">Premium Users</div>
+                                    <div class="info-value">187</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Features (Hidden Initially) -->
+                        <div class="features" id="features">
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                                    AIMLOCK
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="speed">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                                    AIMBOT
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="godmode">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-eye"></i></div>
+                                    AIMHEAD
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="wallhack">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+                                    AIMNECK
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="aimbot">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-coins"></i></div>
+                                    AIM
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="money">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-ghost"></i></div>
+                                    AUTO
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="invisible">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-fire-alt"></i></div>
+                                    RECOIL
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="specialammo">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="feature-item">
+                                <div class="feature-name">
+                                    <div class="feature-icon"><i class="fas fa-plane"></i></div>
+                                    TRICK
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" class="feature-toggle" data-feature="fly">
+                                    <span class="switch-slider"></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
                 </div>
-                
-                <!-- Feature 4 -->
-                <div class="feature-item" data-feature="norecoil">
-                    <div class="feature-info">
-                        <div class="feature-name">NORECOILL</div>
-                        <div class="feature-description">Hỗ Trợ Đường Đạn Thẳng</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 5 -->
-                <div class="feature-item" data-feature="infiniteammo">
-                    <div class="feature-info">
-                        <div class="feature-name">TRICK LOCK</div>
-                        <div class="feature-description">Hỗ Trợ Khi Kéo Tâm Ổn Định Hơn</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 6 -->
-                <div class="feature-item" data-feature="godmode">
-                    <div class="feature-info">
-                        <div class="feature-name">UMP TRICK</div>
-                        <div class="feature-description">Sử Dụng Cho UMP </div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 7 -->
-                <div class="feature-item" data-feature="esp">
-                    <div class="feature-info">
-                        <div class="feature-name">FPS </div>
-                        <div class="feature-description">Tăng Fps Khi Chơi Game</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 8 -->
-                <div class="feature-item" data-feature="radar">
-                    <div class="feature-info">
-                        <div class="feature-name">AOTUHESOT</div>
-                        <div class="feature-description">Khi Kéo Sẽ Tự Động Ghim Đầu Chặt</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 9 -->
-                <div class="feature-item" data-feature="nofog">
-                    <div class="feature-info">
-                        <div class="feature-name">TRICK HEAD</div>
-                        <div class="feature-description">Hỗ Trợ Lock Đầu Cực Cao</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 10 -->
-                <div class="feature-item" data-feature="nightvision">
-                    <div class="feature-info">
-                        <div class="feature-name">AIMHEAD V2</div>
-                        <div class="feature-description">Ghim Đầu Siêu Vip Cho mọi Loại Súng</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 11 -->
-                <div class="feature-item" data-feature="teleport">
-                    <div class="feature-info">
-                        <div class="feature-name">SMOOTH SENSI</div>
-                        <div class="feature-description">Nhạy Game Hơn Khi Chơi</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 12 -->
-                <div class="feature-item" data-feature="fly">
-                    <div class="feature-info">
-                        <div class="feature-name">GUN SENSI</div>
-                        <div class="feature-description">Nhạy Tâm Hơn Cho Các Loại Súng</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 13 -->
-                <div class="feature-item" data-feature="autoloot">
-                    <div class="feature-info">
-                        <div class="feature-name">AIMBOT NECK</div>
-                        <div class="feature-description">Ghim Cổ Khi Kéo</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 14 -->
-                <div class="feature-item" data-feature="crosshair">
-                    <div class="feature-info">
-                        <div class="feature-name">AIMBOT SCORE</div>
-                        <div class="feature-description">Bật Ngắm Khi Kéo Sẽ Vào Đầu</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <!-- Feature 15 -->
-                <div class="feature-item" data-feature="highresolution">
-                    <div class="feature-info">
-                        <div class="feature-name">Đồ Họa Cao</div>
-                        <div class="feature-description">Giảm Lang Khi Bật Độ Hoạ Cao</div>
-                    </div>
-                    <label class="switch">
-                        <input type="checkbox" class="feature-toggle">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="menu-footer">
-                <div>&copy; 2025 Hà Văn Huấn</div>
-                <a href="#" class="footer-link">Hướng Dẫn</a>
             </div>
         </div>
     </div>
     
     <!-- Notification -->
     <div class="notification" id="notification">
-        <div class="icon"><i class="fas fa-check"></i></div>
-        <div class="message" id="notification-message"></div>
+        <div class="notification-icon">
+            <i class="fas fa-info"></i>
+        </div>
+        <div class="notification-message" id="notification-message">
+            This is a notification message.
+        </div>
     </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Orientation Toggle
-            const menuContainer = document.getElementById('menu-container');
-            const horizontalBtn = document.getElementById('horizontal-btn');
-            const verticalBtn = document.getElementById('vertical-btn');
-            
-            horizontalBtn.addEventListener('click', function() {
-                menuContainer.classList.remove('vertical');
-                horizontalBtn.classList.add('active');
-                verticalBtn.classList.remove('active');
-                localStorage.setItem('orientation', 'horizontal');
-            });
-            
-            verticalBtn.addEventListener('click', function() {
-                menuContainer.classList.add('vertical');
-                verticalBtn.classList.add('active');
-                horizontalBtn.classList.remove('active');
-                localStorage.setItem('orientation', 'vertical');
-            });
-            
-            // Load saved orientation
-            const savedOrientation = localStorage.getItem('orientation');
-            if (savedOrientation === 'vertical') {
-                menuContainer.classList.add('vertical');
-                verticalBtn.classList.add('active');
-                horizontalBtn.classList.remove('active');
-            }
-            
-            // Feature Toggle
+            // Elements
+            const loginForm = document.getElementById('login-form');
+            const userInfo = document.getElementById('user-info');
+            const adminInfo = document.getElementById('admin-info');
+            const features = document.getElementById('features');
+            const loginButton = document.getElementById('login-button');
+            const leftPanelTitle = document.getElementById('left-panel-title');
+            const rightPanelTitle = document.getElementById('right-panel-title');
+            const profileName = document.getElementById('profile-name');
+            const profileRole = document.getElementById('profile-role');
+            const loginTime = document.getElementById('login-time');
             const featureToggles = document.querySelectorAll('.feature-toggle');
+            
+            // Login functionality
+            loginButton.addEventListener('click', function() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Simple validation
+                if (username.trim() === '' || password.trim() === '') {
+                    showNotification('Vui lòng nhập tài khoản và mật khẩu');
+                    return;
+                }
+                
+                // Simulate login (in a real app, this would be an API call)
+                showNotification('Đang đăng nhập...');
+                
+                // Simulate loading delay
+                setTimeout(function() {
+                    // If login successful (hardcoded for demo)
+                    if (username === 'havanhuan' && password === 'huanha') {
+                        // Update UI
+                        loginForm.style.display = 'none';
+                        userInfo.style.display = 'flex';
+                        adminInfo.style.display = 'none';
+                        features.style.display = 'grid';
+                        
+                        // Update panel titles
+                        leftPanelTitle.textContent = 'Thông Tin Người Dùng';
+                        rightPanelTitle.textContent = 'Tính Năng VIP';
+                        
+                        // Set user info
+                        profileName.textContent = `Admin VIP (${username})`;
+                        
+                        // Set login time
+                        const now = new Date();
+                        const dateStr = now.toLocaleDateString('vi-VN');
+                        const timeStr = now.toLocaleTimeString('vi-VN');
+                        loginTime.textContent = `Đăng nhập: ${dateStr} - ${timeStr}`;
+                        
+                        showNotification('Đăng nhập thành công!');
+                    } else {
+                        showNotification('Sai tài khoản hoặc mật khẩu!');
+                    }
+                }, 1000);
+            });
+            
+            // Feature toggles
             featureToggles.forEach(toggle => {
                 toggle.addEventListener('change', function() {
-                    const featureItem = this.closest('.feature-item');
-                    const featureName = featureItem.querySelector('.feature-name').textContent;
+                    const feature = this.dataset.feature;
                     const isEnabled = this.checked;
                     
-                    // Toggle active class
-                    if (isEnabled) {
-                        featureItem.classList.add('active');
-                    } else {
-                        featureItem.classList.remove('active');
-                    }
-                    
-                    // Save state
-                    localStorage.setItem(`feature_${featureItem.dataset.feature}`, isEnabled);
+                    // Get feature name from UI
+                    const featureName = this.closest('.feature-item').querySelector('.feature-name').textContent.trim();
                     
                     // Show notification
-                    showNotification(`${featureName} đã ${isEnabled ? 'bật' : 'tắt'}`);
+                    showNotification(`${isEnabled ? 'Đã bật' : 'Đã tắt'} tính năng: ${featureName}`);
                     
-                    // Add ripple effect when enabled
-                    if (isEnabled) {
-                        createRippleEffect(toggle);
-                    }
+                    // Save state to localStorage
+                    localStorage.setItem(`feature_${feature}`, isEnabled);
                 });
             });
             
-            // Load saved feature states
-            document.querySelectorAll('.feature-item').forEach(item => {
-                const featureKey = `feature_${item.dataset.feature}`;
-                const savedState = localStorage.getItem(featureKey);
-                
-                if (savedState === 'true') {
-                    const toggle = item.querySelector('.feature-toggle');
-                    toggle.checked = true;
-                    item.classList.add('active');
-                }
-            });
-            
-            // Notification System
+            // Notification system
             function showNotification(message) {
                 const notification = document.getElementById('notification');
                 const notificationMessage = document.getElementById('notification-message');
@@ -864,38 +1108,20 @@
                 }, 3000);
             }
             
-            // Ripple Effect
-            function createRippleEffect(element) {
-                const parent = element.closest('.feature-item');
-                
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple');
-                ripple.style.position = 'absolute';
-                ripple.style.width = '100%';
-                ripple.style.height = '100%';
-                ripple.style.top = '0';
-                ripple.style.left = '0';
-                ripple.style.background = 'radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%)';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.opacity = '1';
-                ripple.style.borderRadius = 'inherit';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                ripple.style.zIndex = '0';
-                
-                parent.appendChild(ripple);
-                
-                // Trigger animation
-                setTimeout(() => {
-                    ripple.style.transform = 'scale(2.5)';
-                    ripple.style.opacity = '0';
-                }, 10);
-                
-                // Remove after animation
-                setTimeout(() => {
-                    parent.removeChild(ripple);
-                }, 700);
+            // Load saved states
+            function loadSavedStates() {
+                featureToggles.forEach(toggle => {
+                    const feature = toggle.dataset.feature;
+                    const savedState = localStorage.getItem(`feature_${feature}`);
+                    
+                    if (savedState === 'true') {
+                        toggle.checked = true;
+                    }
+                });
             }
+            
+            // Load states on page load
+            loadSavedStates();
         });
     </script>
 </body>
