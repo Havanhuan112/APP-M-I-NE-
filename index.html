@@ -1,1128 +1,1047 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Black+Ops+One&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="msapplication-TileColor" content="#000">
 <meta name="theme-color" content="#000">
-    <style>
-        :root {
-            --primary: #8a2be2;           /* Purple */
-            --primary-light: #9d4eed;
-            --primary-dark: #6a1cb2;
-            --primary-transparent: rgba(138, 43, 226, 0.2);
-            --primary-glow: rgba(138, 43, 226, 0.5);
-            
-            --accent: #ff3a5e;            /* Red-Pink */
-            --accent-light: #ff5c79;
-            --accent-dark: #e01e41;
-            
-            --success: #00c853;           /* Green */
-            --warning: #ffab00;           /* Amber */
-            --error: #f44336;             /* Red */
-            --info: #2196f3;              /* Blue */
-            
-            --background: #121212;
-            --card: rgba(30, 30, 35, 0.8);
-            --card-dark: rgba(25, 25, 30, 0.9);
-            --card-light: rgba(35, 35, 40, 0.7);
-            
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-tertiary: rgba(255, 255, 255, 0.6);
-            --text-disabled: rgba(255, 255, 255, 0.4);
-            
-            --border: rgba(255, 255, 255, 0.1);
-            --border-active: rgba(255, 255, 255, 0.2);
-            
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.4);
-            
-            --blur: 15px;
-            
-            --font-main: 'Rajdhani', sans-serif;
-            --font-display: 'Oxanium', cursive;
-            
-            --anim-fast: 0.2s;
-            --anim-normal: 0.3s;
-            --anim-slow: 0.5s;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-main);
-            background: #000;
-            background-size: cover;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-primary);
-            padding: 20px;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
-            z-index: -1;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1000px;
-            position: relative;
-        }
-
-        /* Mod Menu Main Container */
-        .mod-menu {
-            width: 100%;
-            background: var(--card);
-            backdrop-filter: blur(var(--blur));
-            -webkit-backdrop-filter: blur(var(--blur));
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 30px var(--primary-glow), inset 0 0 20px var(--primary-transparent);
-            position: relative;
-        }
-
-        /* Title Bar */
-        .title-bar {
-            background: var(--card-dark);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-        }
-
-        .menu-title {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 24px;
-            letter-spacing: 1px;
-            color: var(--primary-light);
-            text-transform: uppercase;
-            text-shadow: 0 0 10px var(--primary-glow);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .title-icon {
-            background: var(--primary);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        .version-badge {
-            background: var(--card-light);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            border: 1px solid var(--border);
-        }
-
-        /* Content Area */
-        .content-area {
-            display: flex;
-            padding: 20px;
-            gap: 20px;
-        }
-
-        /* Left Panel */
-        .panel {
-            background: var(--card-light);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all var(--anim-normal) ease;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .panel:hover {
-            border-color: var(--border-active);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .left-panel {
-            width: 350px;
-            flex-shrink: 0;
-        }
-
-        .right-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .panel-header {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px 15px;
-            font-weight: 600;
-            font-size: 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .panel-content {
-            padding: 20px;
-        }
-
-        /* Login Form */
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .logo {
-            width: 100px;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            padding: 15px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border);
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-top-color: var(--primary);
-            border-bottom-color: var(--primary);
-            animation: spin 5s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .logo img {
-            max-width: 100%;
-            max-height: 100%;
-            filter: drop-shadow(0 0 5px var(--primary-glow));
-        }
-
-        .input-group {
-            position: relative;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-            font-size: 16px;
-        }
-
-        .input-field {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            padding: 12px 15px 12px 40px;
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-family: var(--font-main);
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            transition: all var(--anim-fast) ease;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px var(--primary-transparent);
-        }
-
-        .input-field::placeholder {
-            color: var(--text-disabled);
-        }
-
-        .login-btn {
-            background: var(--primary);
-            color: var(--text-primary);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-family: var(--font-main);
-            font-weight: 600;
-            font-size: 16px;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all var(--anim-fast) ease;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
-        }
-
-        .login-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to right,
-                rgba(255, 255, 255, 0),
-                rgba(255, 255, 255, 0.1),
-                rgba(255, 255, 255, 0)
-            );
-            transform: rotate(30deg);
-            transition: all 0.5s ease;
-            opacity: 0;
-        }
-
-        .login-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
-        }
-
-        .login-btn:hover::after {
-            opacity: 1;
-            left: 100%;
-        }
-
-        .login-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
-        }
-
-        /* User Info */
-        .user-info {
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .user-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 5px;
-        }
-
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--primary-dark);
-            overflow: hidden;
-            border: 2px solid var(--primary-light);
-            box-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        .user-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .user-details {
-            flex: 1;
-        }
-
-        .user-name {
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: 2px;
-            color: var(--text-primary);
-        }
-
-        .user-role {
-            font-size: 14px;
-            color: var(--primary-light);
-            font-weight: 500;
-        }
-
-        .user-stats {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .stat-item {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-            border: 1px solid var(--border);
-        }
-
-        .stat-value {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--primary-light);
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
-
-        .login-time {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        /* Admin Info */
-        .admin-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .server-status {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px 15px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-        }
-
-        .status-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .status-label {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
-
-        .status-value {
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .status-online {
-            background: var(--success);
-            box-shadow: 0 0 5px var(--success);
-        }
-
-        .status-warning {
-            background: var(--warning);
-            box-shadow: 0 0 5px var(--warning);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .info-item {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .info-label {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-        }
-
-        .info-value {
-            font-weight: 600;
-            font-size: 15px;
-            color: var(--text-primary);
-        }
-
-        /* Feature Switches */
-        .features {
-            display: none;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .feature-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 12px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            transition: all var(--anim-fast) ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(
-                circle at center,
-                rgba(138, 43, 226, 0.2),
-                transparent 70%
-            );
-            opacity: 0;
-            transition: opacity var(--anim-normal) ease;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .feature-item:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .feature-item:hover::before {
-            opacity: 1;
-        }
-
-        /* Fire effect for active features */
-        .feature-item.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(255, 58, 94, 0.5);
-        }
-
-        .feature-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(
-                to top,
-                rgba(255, 58, 94, 0.8),
-                rgba(255, 165, 0, 0.6),
-                rgba(255, 214, 0, 0.3)
-            );
-            filter: blur(4px);
-            opacity: 0.7;
-            animation: flicker 2s infinite alternate;
-            z-index: 0;
-        }
-
-        @keyframes flicker {
-            0%, 100% { opacity: 0.7; height: 8px; }
-            25% { opacity: 0.8; height: 10px; }
-            50% { opacity: 0.6; height: 7px; }
-            75% { opacity: 0.9; height: 9px; }
-        }
-
-        .feature-name {
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .feature-icon {
-            width: 22px;
-            height: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(145deg, rgba(138, 43, 226, 0.7), rgba(106, 28, 178, 0.7));
-            border-radius: 4px;
-            font-size: 11px;
-            color: var(--text-primary);
-            box-shadow: 0 0 8px rgba(138, 43, 226, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-icon::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-
-        .feature-item.active .feature-icon {
-            background: linear-gradient(145deg, rgba(255, 58, 94, 0.8), rgba(224, 30, 65, 0.8));
-            box-shadow: 0 0 10px rgba(255, 58, 94, 0.5);
-            animation: pulse 2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Switch Styling */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-            z-index: 1;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .switch-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            transition: .3s;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .switch-slider:before {
-            position: absolute;
-            content: "";
-            height: 14px;
-            width: 14px;
-            left: 3px;
-            bottom: 2px;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            transition: .3s;
-            border-radius: 50%;
-            z-index: 2;
-            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .switch-slider::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.2), transparent);
-            z-index: 1;
-            opacity: 0.5;
-        }
-
-        .feature-item:hover .switch-slider {
-            border-color: var(--primary);
-        }
-
-        input:checked + .switch-slider {
-            background: linear-gradient(to right, var(--accent-dark), var(--accent));
-            box-shadow: 0 0 8px var(--accent);
-            border-color: var(--accent);
-        }
-
-        input:checked + .switch-slider:before {
-            transform: translateX(20px);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Fire effect in the switch */
-        input:checked + .switch-slider::after {
-            background: linear-gradient(
-                to right,
-                rgba(255, 58, 94, 0.5),
-                rgba(255, 165, 0, 0.3),
-                transparent
-            );
-            animation: flamePulse 2s infinite alternate;
-        }
-        
-        @keyframes flamePulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: -300px;
-            width: 280px;
-            background: var(--card-dark);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-            box-shadow: var(--shadow-md);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 1000;
-            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(var(--blur));
-            -webkit-backdrop-filter: blur(var(--blur));
-        }
-
-        .notification.show {
-            right: 20px;
-        }
-
-        .notification-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 0 8px var(--primary-glow);
-        }
-
-        .notification-message {
-            flex: 1;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        @media (max-width: 768px) {
-            .content-area {
-                flex-direction: column;
-            }
-            
-            .left-panel {
-                width: 100%;
-            }
-            
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            .panel-header, .menu-title {
-                font-size: 20px;
-            }
-        }
-    </style>
+  <style>
+    :root {
+      --primary-red: #FF3B30;
+      --primary-green: #34C759;
+      --primary-blue: #007AFF;
+      --primary-purple: #AF52DE;
+      --primary-orange: #FF9500;
+      --dark-bg: #121212;
+      --dark-panel: rgba(18, 18, 18, 0.85);
+      --button-height: 36px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-red) #222;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-red);
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff0800;
+    }
+    
+    html, body {
+      background-color: #000000;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow-x: hidden;
+    }
+    
+    .background-effect {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+      z-index: -2;
+    }
+    
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: linear-gradient(rgba(255, 59, 48, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 59, 48, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: -1;
+      opacity: 0.5;
+    }
+    
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    
+    .particle {
+      position: absolute;
+      background-color: var(--primary-red);
+      border-radius: 50%;
+      opacity: 0.25;
+      animation: float 15s infinite linear;
+    }
+    
+    .line-particle {
+      position: absolute;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--primary-red), transparent);
+      opacity: 0.2;
+      animation: lineFloat 10s infinite ease-in-out;
+      transform-origin: 0% 0%;
+    }
+    
+    @keyframes lineFloat {
+      0%, 100% {
+        transform: translateY(-100%) rotate(0deg);
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 0.2;
+      }
+      50% {
+        transform: translateY(100vh) rotate(5deg);
+      }
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+      }
+    }
+    
+    .mod-menu {
+      background-color: var(--dark-panel);
+      border: 1px solid #333333;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(255, 59, 48, 0.2), 0 0 15px rgba(0, 0, 0, 0.6);
+      padding: 12px;
+      width: 100%;
+      max-width: 750px;
+      max-height: 85vh;
+      margin: 16px;
+      opacity: 1;
+      transform: scale(1);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+      animation: fadeIn 1s ease-out forwards;
+      position: relative;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      max-height: calc(85vh - 24px);
+    }
+    
+    @media (min-width: 768px) {
+      .menu-container {
+        flex-direction: row;
+      }
+    }
+    
+    .left-panel {
+      width: 100%;
+      border-bottom: 1px solid #333333;
+      padding-bottom: 12px;
+      flex-shrink: 0;
+    }
+    
+    .right-panel {
+      width: 100%;
+      padding-top: 12px;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: calc(85vh - 24px);
+      padding-right: 5px;
+      scrollbar-width: thin;
+      position: relative;
+    }
+    
+    .right-panel::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 5px;
+      bottom: 0;
+      height: 40px;
+      background: linear-gradient(to top, var(--dark-panel), transparent);
+      pointer-events: none;
+      opacity: 0.9;
+      z-index: 1;
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--primary-red);
+      font-size: 20px;
+      animation: bounce 2s infinite;
+      z-index: 2;
+      opacity: 0.7;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-8px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-4px);
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .left-panel {
+        width: 30%;
+        border-bottom: none;
+        border-right: 1px solid #333333;
+        padding-right: 12px;
+        padding-bottom: 0;
+      }
+      
+      .right-panel {
+        width: 70%;
+        padding-left: 12px;
+        padding-top: 0;
+        max-height: calc(85vh - 24px);
+      }
+    }
+    
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: radial-gradient(circle at center, rgba(255, 59, 48, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+      animation: pulseGlow 4s infinite;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+    
+    .logo-text {
+      font-family: 'Black Ops One', cursive;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-red);
+      text-align: center;
+      text-shadow: 0 0 10px rgba(255, 59, 48, 0.6);
+      animation: textGlow 2s infinite;
+      letter-spacing: 1px;
+    }
+    
+    @keyframes textGlow {
+      0%, 100% { text-shadow: 0 0 5px rgba(255, 59, 48, 0.6); }
+      50% { text-shadow: 0 0 20px rgba(255, 59, 48, 0.9), 0 0 30px rgba(255, 59, 48, 0.3); }
+    }
+    
+    .logo-line {
+      margin-top: 6px;
+      height: 2px;
+      width: 85%;
+      background: linear-gradient(to right, transparent, var(--primary-red), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .logo-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .contact-info {
+      color: #AAAAAA;
+      padding: 10px;
+      background-color: rgba(20, 20, 20, 0.4);
+      border-radius: 8px;
+      margin: 0 4px;
+      border: 1px solid rgba(51, 51, 51, 0.5);
+      font-size: 13px;
+    }
+    
+    .info-title {
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-left: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .info-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 12px;
+      width: 3px;
+      background: var(--primary-red);
+      border-radius: 3px;
+    }
+    
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      animation: slideIn 0.5s ease forwards;
+      opacity: 0;
+      transform: translateX(-15px);
+      transition: all 0.3s ease;
+    }
+    
+    .info-item:hover {
+      transform: translateX(3px);
+      color: #fff;
+    }
+    
+    .info-item:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    
+    .info-item:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    
+    .info-item:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    
+    .info-icon {
+      color: var(--primary-red);
+      margin-right: 6px;
+      font-size: 12px;
+      width: 18px;
+      text-align: center;
+    }
+    
+    .additional-info {
+      font-size: 12px;
+      animation: slideIn 0.5s ease forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
+      background-color: rgba(30, 30, 30, 0.4);
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 5px;
+      border-left: 2px solid var(--primary-red);
+      line-height: 1.5;
+    }
+    
+    .mod-features {
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+      margin-top: 1px;
+    }
+    
+    .mod-features::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--primary-red), transparent);
+      margin: 3px auto 0;
+    }
+    
+    .buttons-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 4px;
+    }
+    
+    @media (min-width: 640px) {
+      .buttons-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .section-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      margin: 14px 0 6px;
+      opacity: 0.8;
+      overflow: hidden;
+      animation: fadeZoomIn 0.8s forwards;
+    }
+    
+    @keyframes fadeZoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+    }
+    
+    .section-divider span {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #ccc;
+      margin: 0 10px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+    
+    .toggle-button {
+      position: relative;
+      border-radius: 6px;
+      padding: 7px 12px;
+      height: var(--button-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      overflow: hidden;
+      margin: 0;
+      transform: scale(1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(2px);
+      animation: fadeIn 0.6s both;
+      animation-delay: calc(var(--index) * 0.08s);
+    }
+    
+    .toggle-button:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .toggle-button.inactive {
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a1a1a);
+      border: 1px solid #333;
+    }
+    
+    .toggle-button.color-1.inactive::before {
+      background: linear-gradient(to right, transparent, var(--primary-red));
+    }
+    
+    .toggle-button.color-2.inactive::before {
+      background: linear-gradient(to right, transparent, var(--primary-blue));
+    }
+    
+    .toggle-button.color-3.inactive::before {
+      background: linear-gradient(to right, transparent, var(--primary-purple));
+    }
+    
+    .toggle-button.color-4.inactive::before {
+      background: linear-gradient(to right, transparent, var(--primary-orange));
+    }
+    
+    .toggle-button.inactive::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 35%;
+      opacity: 0.4;
+      z-index: 1;
+    }
+    
+    .toggle-button.color-1.active {
+      background-color: var(--primary-green);
+      box-shadow: 0 0 12px rgba(52, 199, 89, 0.7);
+    }
+    
+    .toggle-button.color-2.active {
+      background-color: var(--primary-blue);
+      box-shadow: 0 0 12px rgba(0, 122, 255, 0.7);
+    }
+    
+    .toggle-button.color-3.active {
+      background-color: var(--primary-purple);
+      box-shadow: 0 0 12px rgba(175, 82, 222, 0.7);
+    }
+    
+    .toggle-button.color-4.active {
+      background-color: var(--primary-orange);
+      box-shadow: 0 0 12px rgba(255, 149, 0, 0.7);
+    }
+    
+    .toggle-button.active {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .button-text {
+      color: white;
+      font-weight: 500;
+      font-size: 12px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .toggle-indicator {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .toggle-button.color-1.inactive .toggle-indicator {
+      background-color: var(--primary-red);
+    }
+    
+    .toggle-button.color-2.inactive .toggle-indicator {
+      background-color: var(--primary-blue);
+    }
+    
+    .toggle-button.color-3.inactive .toggle-indicator {
+      background-color: var(--primary-purple);
+    }
+    
+    .toggle-button.color-4.inactive .toggle-indicator {
+      background-color: var(--primary-orange);
+    }
+    
+    .toggle-button.active .toggle-indicator {
+      background-color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    }
+    
+    .toggle-effect {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .toggle-button.active .toggle-effect {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .toggle-button.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+      z-index: 1;
+    }
+    
+    .button-icon {
+      margin-right: 6px;
+      font-size: 11px;
+      color: inherit;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(10, 10, 10, 0.85);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 59, 48, 0.3);
+      z-index: 1000;
+      font-size: 13px;
+      border-left: 3px solid var(--primary-red);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      min-width: 180px;
+      text-align: center;
+    }
+    
+    .notification::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 50%);
+      z-index: -1;
+    }
+    
+    .notification::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 100%;
+      top: 0;
+      left: -100px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: lightSweep 2s ease-in-out infinite;
+    }
+    
+    @keyframes lightSweep {
+      0% {
+        left: -100px;
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        left: 100%;
+        opacity: 0;
+      }
+    }
+    
+    .notification.show {
+      opacity: 1;
+      transform: translate(-50%, -10px);
+    }
+    
+    .notification.hide {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="mod-menu">
-            <div class="title-bar">
-                <h1 class="menu-title">
-                    <div class="title-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    HUẤN HÀ
-                </h1>
-                <div class="version-badge">v3.2.0</div>
-            </div>
-            
-            <div class="content-area">
-                <!-- Left Panel - Login/User Info -->
-                <div class="panel left-panel">
-                    <div class="panel-header">
-                        <span id="left-panel-title">Đăng Nhập</span>
-                        <i class="fas fa-user-shield"></i>
-                    </div>
-                    <div class="panel-content">
-                        <!-- Login Form -->
-                        <div class="login-form" id="login-form">
-                            <div class="logo-container">
-                                <div class="logo">
-                                    <img src="https://i.imgur.com/5bQftdY.png" alt="Logo">
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <i class="fas fa-user"></i>
-                                <input type="text" class="input-field" id="username" placeholder="Tên tài khoản">
-                            </div>
-                            <div class="input-group">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" class="input-field" id="password" placeholder="Mật khẩu">
-                            </div>
-                            <button type="button" class="login-btn" id="login-button">Đăng Nhập</button>
-                        </div>
-                        
-                        <!-- User Info (Hidden Initially) -->
-                        <div class="user-info" id="user-info">
-                            <div class="user-header">
-                                <div class="user-avatar">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSI2NCIgeTE9IjE5LjUiIHgyPSI2NCIgeTI9IjEwOC41IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOGEyYmUyIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNjEwMGZmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjQiIGN5PSI2NCIgcj0iNjQiIGZpbGw9IiMxMDEwMTAiLz48Y2lyY2xlIGN4PSI2NCIgY3k9IjY0IiByPSI0OCIgZmlsbD0idXJsKCNhKSIvPjxjaXJjbGUgY3g9IjY0IiBjeT0iNDYiIHI9IjE2IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTQwLDkzYzAtMTcuNywxMC43LTMyLDI0LTMyUzg4LDc1LjMsODgsOTMiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iOCIvPjwvc3ZnPg==" alt="User Avatar">
-                                </div>
-                                <div class="user-details">
-                                    <div class="user-name" id="profile-name">Admin VIP</div>
-                                    <div class="user-role" id="profile-role">Premium Member</div>
-                                </div>
-                            </div>
-                            
-                            <div class="user-stats">
-                                <div class="stat-item">
-                                    <div class="stat-value">99</div>
-                                    <div class="stat-label">Level</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">30</div>
-                                    <div class="stat-label">Days</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-value">VIP</div>
-                                    <div class="stat-label">Status</div>
-                                </div>
-                            </div>
-                            
-                            <div class="login-time" id="login-time">
-                                Đăng nhập: 28/04/2025 - 18:30:45
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Right Panel - Admin Info/Features -->
-                <div class="panel right-panel">
-                    <div class="panel-header">
-                        <span id="right-panel-title">Thông Tin Hệ Thống</span>
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <div class="panel-content">
-                        <!-- Admin Info -->
-                        <div class="admin-info" id="admin-info">
-                            <div class="server-status">
-                                <div class="status-item">
-                                    <div class="status-label">Server Status</div>
-                                    <div class="status-value">
-                                        <span class="status-indicator status-online"></span>
-                                        Online
-                                    </div>
-                                </div>
-                                <div class="status-item">
-                                    <div class="status-label">Server Load</div>
-                                    <div class="status-value">
-                                        <span class="status-indicator status-warning"></span>
-                                        65%
-                                    </div>
-                                </div>
-                                <div class="status-item">
-                                    <div class="status-label">Active Users</div>
-                                    <div class="status-value">254</div>
-                                </div>
-                            </div>
-                            
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <div class="info-label">Version</div>
-                                    <div class="info-value">3.2.0 Beta</div>
-                                </div>
-                                <div class="info-item">
-                                    <div class="info-label">Last Update</div>
-                                    <div class="info-value">28/04/2025</div>
-                                </div>
-                                <div class="info-item">
-                                    <div class="info-label">API Status</div>
-                                    <div class="info-value">Connected</div>
-                                </div>
-                                <div class="info-item">
-                                    <div class="info-label">Premium Users</div>
-                                    <div class="info-value">187</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Features (Hidden Initially) -->
-                        <div class="features" id="features">
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                                    AIMLOCK
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="speed">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-                                    AIMBOT
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="godmode">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-eye"></i></div>
-                                    AIMHEAD
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="wallhack">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
-                                    AIMNECK
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="aimbot">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-coins"></i></div>
-                                    AIM
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="money">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-ghost"></i></div>
-                                    AUTO
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="invisible">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-fire-alt"></i></div>
-                                    RECOIL
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="specialammo">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-name">
-                                    <div class="feature-icon"><i class="fas fa-plane"></i></div>
-                                    TRICK
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" class="feature-toggle" data-feature="fly">
-                                    <span class="switch-slider"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="background-effect"></div>
+  <div class="grid-overlay"></div>
+  <div class="particles" id="particles"></div>
+  
+  <div class="mod-menu" id="modMenu">
+    <div class="menu-container">
+      <!-- Left Panel - Logo and Contact Info -->
+      <div class="left-panel">
+        <!-- Logo Section -->
+        <div class="logo">
+          <div class="logo-text">HUẤN HÀ<br></div>
+          <div class="logo-line"></div>
         </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h3 class="info-title">Contact Info</h3>
+          
+          <div class="info-item">
+            <span class="info-icon"><i class="fa-solid fa-envelope"></i></span>
+            <span>huanha@gmail.com</span>
+          </div>
+          
+          <div class="info-item">
+            <span class="info-icon"><i class="fa-solid fa-phone"></i></span>
+            <span>+84 325 575 642</span>
+          </div>
+          
+          <div class="info-item">
+            <span class="info-icon"><i class="fa-brands fa-telegram"></i></span>
+            <span>@suporthuanha</span>
+          </div>
+          
+          <h3 class="info-title" style="margin-top: 14px;">Additional Info</h3>
+          <p class="additional-info">
+            <i class="fa-solid fa-code"></i> Version: 2.1.5<br>
+            <i class="fa-solid fa-calendar-days"></i> Last Updated: 2023-07-15<br>
+            <i class="fa-solid fa-mobile-screen"></i> Iphone 5++
+          </p>
+        </div>
+      </div>
+      
+      <!-- Right Panel - Mod Buttons -->
+      <div class="right-panel" id="rightPanel">
+        <h2 class="mod-features">Mod Features</h2>
+        
+        <!-- Buttons Container -->
+        <div class="buttons-container" id="buttonsContainer">
+          <!-- Toggle buttons will be added here by JavaScript -->
+        </div>
+        
+        <!-- Scroll indicator arrow -->
+        <div class="scroll-indicator" id="scrollIndicator">
+          <i class="fa-solid fa-angle-down"></i>
+        </div>
+      </div>
     </div>
+  </div>
+  
+  <!-- Notification element -->
+  <div class="notification" id="notification"></div>
+
+  <script>
+    // Create particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 10;
+      const lineCount = 5;
+      
+      // Create floating particles
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random properties
+        const size = Math.random() * 25 + 5;
+        const posX = Math.random() * window.innerWidth;
+        const posY = Math.random() * window.innerHeight + window.innerHeight; // Start below screen
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 10;
+        
+        // Apply random properties
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}px`;
+        particle.style.bottom = `${-posY}px`;
+        particle.style.opacity = Math.random() * 0.15 + 0.1;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+      
+      // Create line particles
+      for (let i = 0; i < lineCount; i++) {
+        const line = document.createElement('div');
+        line.className = 'line-particle';
+        
+        // Random properties
+        const height = Math.random() * 150 + 100;
+        const posX = Math.random() * window.innerWidth;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 8;
+        
+        // Apply random properties
+        line.style.height = `${height}px`;
+        line.style.left = `${posX}px`;
+        line.style.top = '0';
+        line.style.animationDuration = `${duration}s`;
+        line.style.animationDelay = `${delay}s`;
+        
+        particlesContainer.appendChild(line);
+      }
+    }
     
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <div class="notification-icon">
-            <i class="fas fa-info"></i>
-        </div>
-        <div class="notification-message" id="notification-message">
-            This is a notification message.
-        </div>
-    </div>
+    // Mod features data
+    const modFeatures = [
+      // Combat Section
+      { id: 'wallhack', name: 'Aimlock', icon: 'fa-eye', active: false, color: 1, section: 'combat' },
+      { id: 'aimbot', name: 'Aimbot', icon: 'fa-crosshairs', active: false, color: 1, section: 'combat' },
+      { id: 'norecoil', name: 'No Recoil', icon: 'fa-gun', active: false, color: 1, section: 'combat' },
+      { id: 'autoheadshot', name: 'Auto Headshot', icon: 'fa-bullseye', active: false, color: 1, section: 'combat' },
+      
+      // Character Section
+      { id: 'speedhack', name: 'AimHEAD', icon: 'fa-person-running', active: false, color: 2, section: 'character' },
+      { id: 'godmode', name: 'Sensi', icon: 'fa-shield-halved', active: false, color: 2, section: 'character' },
+      { id: 'unlimitedammo', name: 'Aimscore', icon: 'fa-bullets', active: false, color: 2, section: 'character' },
+      { id: 'invisibility', name: 'Invisibility', icon: 'fa-ghost', active: false, color: 2, section: 'character' },
+      
+      // Visual Section
+      { id: 'esp', name: 'SmoodName', icon: 'fa-radar', active: false, color: 3, section: 'visual' },
+      { id: 'nightvision', name: 'Night Vision', icon: 'fa-moon', active: false, color: 3, section: 'visual' },
+    ];
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Elements
-            const loginForm = document.getElementById('login-form');
-            const userInfo = document.getElementById('user-info');
-            const adminInfo = document.getElementById('admin-info');
-            const features = document.getElementById('features');
-            const loginButton = document.getElementById('login-button');
-            const leftPanelTitle = document.getElementById('left-panel-title');
-            const rightPanelTitle = document.getElementById('right-panel-title');
-            const profileName = document.getElementById('profile-name');
-            const profileRole = document.getElementById('profile-role');
-            const loginTime = document.getElementById('login-time');
-            const featureToggles = document.querySelectorAll('.feature-toggle');
-            
-            // Login functionality
-            loginButton.addEventListener('click', function() {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                // Simple validation
-                if (username.trim() === '' || password.trim() === '') {
-                    showNotification('Vui lòng nhập tài khoản và mật khẩu');
-                    return;
-                }
-                
-                // Simulate login (in a real app, this would be an API call)
-                showNotification('Đang đăng nhập...');
-                
-                // Simulate loading delay
-                setTimeout(function() {
-                    // If login successful (hardcoded for demo)
-                    if (username === 'havanhuan' && password === 'huanha') {
-                        // Update UI
-                        loginForm.style.display = 'none';
-                        userInfo.style.display = 'flex';
-                        adminInfo.style.display = 'none';
-                        features.style.display = 'grid';
-                        
-                        // Update panel titles
-                        leftPanelTitle.textContent = 'Thông Tin Người Dùng';
-                        rightPanelTitle.textContent = 'Tính Năng VIP';
-                        
-                        // Set user info
-                        profileName.textContent = `Admin VIP (${username})`;
-                        
-                        // Set login time
-                        const now = new Date();
-                        const dateStr = now.toLocaleDateString('vi-VN');
-                        const timeStr = now.toLocaleTimeString('vi-VN');
-                        loginTime.textContent = `Đăng nhập: ${dateStr} - ${timeStr}`;
-                        
-                        showNotification('Đăng nhập thành công!');
-                    } else {
-                        showNotification('Sai tài khoản hoặc mật khẩu!');
-                    }
-                }, 1000);
-            });
-            
-            // Feature toggles
-            featureToggles.forEach(toggle => {
-                toggle.addEventListener('change', function() {
-                    const feature = this.dataset.feature;
-                    const isEnabled = this.checked;
-                    
-                    // Get feature name from UI
-                    const featureName = this.closest('.feature-item').querySelector('.feature-name').textContent.trim();
-                    
-                    // Show notification
-                    showNotification(`${isEnabled ? 'Đã bật' : 'Đã tắt'} tính năng: ${featureName}`);
-                    
-                    // Save state to localStorage
-                    localStorage.setItem(`feature_${feature}`, isEnabled);
-                });
-            });
-            
-            // Notification system
-            function showNotification(message) {
-                const notification = document.getElementById('notification');
-                const notificationMessage = document.getElementById('notification-message');
-                
-                notificationMessage.textContent = message;
-                notification.classList.add('show');
-                
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3000);
-            }
-            
-            // Load saved states
-            function loadSavedStates() {
-                featureToggles.forEach(toggle => {
-                    const feature = toggle.dataset.feature;
-                    const savedState = localStorage.getItem(`feature_${feature}`);
-                    
-                    if (savedState === 'true') {
-                        toggle.checked = true;
-                    }
-                });
-            }
-            
-            // Load states on page load
-            loadSavedStates();
+    // DOM elements
+    const buttonsContainer = document.getElementById('buttonsContainer');
+    const rightPanel = document.getElementById('rightPanel');
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    const notification = document.getElementById('notification');
+    
+    // Show notification
+    function showNotification(message) {
+      // Clear any existing timeouts
+      if (window.notificationTimeout) {
+        clearTimeout(window.notificationTimeout);
+        notification.classList.remove('show');
+        notification.classList.remove('hide');
+        
+        // Short delay before showing new notification
+        setTimeout(() => {
+          displayNotification(message);
+        }, 100);
+      } else {
+        displayNotification(message);
+      }
+    }
+    
+    function displayNotification(message) {
+      // Create icon based on message content
+      let icon = 'fa-circle-check';
+      let color = 'var(--primary-green)';
+      
+      if (message.includes('Deactivated')) {
+        icon = 'fa-circle-xmark';
+        color = 'var(--primary-red)';
+      }
+      
+      // Add icon and style to notification
+      notification.innerHTML = `
+        <i class="fa-solid ${icon}" style="color: ${color}; margin-right: 8px; font-size: 14px;"></i>
+        <span>${message}</span>
+      `;
+      
+      notification.classList.add('show');
+      
+      // Set timeout to hide notification after 3 seconds
+      window.notificationTimeout = setTimeout(() => {
+        notification.classList.add('hide');
+        
+        // After animation completes, remove classes
+        setTimeout(() => {
+          notification.classList.remove('show');
+          notification.classList.remove('hide');
+        }, 300);
+      }, 3000);
+    }
+    
+    // Create toggle buttons
+    function createToggleButtons() {
+      buttonsContainer.innerHTML = '';
+      
+      // Group features by section
+      const sections = {
+        'combat': { title: 'Combat Mods', items: [] },
+        'character': { title: 'Character Mods', items: [] },
+        'visual': { title: 'Visual Mods', items: [] }
+      };
+      
+      // Sort features into sections
+      modFeatures.forEach(feature => {
+        if (sections[feature.section]) {
+          sections[feature.section].items.push(feature);
+        }
+      });
+      
+      // Create sections and buttons
+      Object.entries(sections).forEach(([sectionKey, section], sectionIndex) => {
+        // Add section divider
+        if (sectionIndex > 0) {
+          const divider = document.createElement('div');
+          divider.className = 'section-divider';
+          divider.innerHTML = `<span>${section.title}</span>`;
+          buttonsContainer.appendChild(divider);
+        } else {
+          const divider = document.createElement('div');
+          divider.className = 'section-divider';
+          divider.innerHTML = `<span>${section.title}</span>`;
+          buttonsContainer.appendChild(divider);
+        }
+        
+        // Add buttons for this section
+        section.items.forEach((feature, index) => {
+          const buttonDiv = document.createElement('div');
+          const colorClass = `color-${feature.color || 1}`;
+          buttonDiv.className = `toggle-button ${colorClass} ${feature.active ? 'active' : 'inactive'}`;
+          buttonDiv.dataset.id = feature.id;
+          buttonDiv.style.setProperty('--index', index);
+          
+          const iconClass = feature.icon || 'fa-check';
+          buttonDiv.innerHTML = `
+            <span class="button-text"><i class="fa-solid ${iconClass} button-icon"></i>${feature.name}</span>
+            <div class="toggle-indicator"></div>
+            <div class="toggle-effect"></div>
+          `;
+          
+          buttonDiv.addEventListener('click', () => toggleFeature(feature.id));
+          buttonsContainer.appendChild(buttonDiv);
         });
-    </script>
+      });
+    }
+    
+    // Toggle feature state
+    function toggleFeature(id) {
+      for (let i = 0; i < modFeatures.length; i++) {
+        if (modFeatures[i].id === id) {
+          modFeatures[i].active = !modFeatures[i].active;
+          
+          // Show notification
+          const status = modFeatures[i].active ? 'Activated' : 'Deactivated';
+          showNotification(`${modFeatures[i].name} ${status}`);
+          
+          break;
+        }
+      }
+      createToggleButtons();
+    }
+    
+    // Handle scroll behavior
+    function handleScroll() {
+      const panel = rightPanel;
+      
+      // Show/hide scroll indicator based on scroll position
+      if (panel.scrollHeight > panel.clientHeight) {
+        scrollIndicator.style.display = 'block';
+        
+        // Hide indicator when scrolled to bottom
+        if (panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 20) {
+          scrollIndicator.style.opacity = '0';
+        } else {
+          scrollIndicator.style.opacity = '0.7';
+        }
+      } else {
+        scrollIndicator.style.display = 'none';
+      }
+    }
+    
+    // Handle mouse movement for 3D effect
+    function handle3DEffect(e) {
+      const buttons = document.querySelectorAll('.toggle-button');
+      buttons.forEach(button => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const angleX = (y - centerY) / 15;
+          const angleY = (centerX - x) / 15;
+          
+          button.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+        } else {
+          button.style.transform = '';
+        }
+      });
+    }
+    
+    // Initialize mod menu
+    function init() {
+      createParticles();
+      createToggleButtons();
+      handleScroll();
+      
+      // Listen for scroll events
+      rightPanel.addEventListener('scroll', handleScroll);
+      
+      // Add 3D hover effect
+      document.addEventListener('mousemove', handle3DEffect);
+      
+      // Scroll indicator click to scroll down
+      scrollIndicator.addEventListener('click', () => {
+        rightPanel.scrollBy({
+          top: 100,
+          behavior: 'smooth'
+        });
+      });
+    }
+    
+    // Run initialization
+    init();
+  </script>
 </body>
 </html>
